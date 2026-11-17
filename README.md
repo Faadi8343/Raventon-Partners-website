@@ -19,7 +19,7 @@ A multi-page website for a performance marketing agency offering **Google Ads**,
 python server.py          # site + accounts API on http://localhost:8000
 python server.py dump     # list registered users and contact leads
 ```
-`server.py` uses only the Python standard library. It serves the site and stores records in SQLite at `data/rvn.db` (git-ignored):
+`server.py` uses only the Python standard library. It serves the site and stores records in SQLite at `data/rvn.db` (git-ignored). The API code lives in `api/_core.py`; set `DATABASE_URL` to use Postgres instead (needs `pip install -r requirements.txt`). Tables:
 - `users`: advertiser and publisher accounts (passwords hashed with PBKDF2-SHA256)
 - `sessions`: sign-in sessions (HttpOnly cookie, 1 or 30 days)
 - `leads`: contact form submissions
@@ -38,3 +38,8 @@ Styles and scripts are in `assets/`. Design tokens (colours, fonts, radius, shad
 - `next-reference/Reveal.tsx` is a TypeScript/Next.js version of the reveal component, for a future port. It is not used by the static site.
 - Company details, testimonials, clients and statistics are placeholders.
 - Fonts load from Google Fonts; everything else is local.
+
+## Deploy (Vercel)
+- Static pages are served as-is; `api/index.py` is a Python serverless function that handles every `/api/*` route (see `vercel.json`).
+- Accounts and leads need a hosted Postgres database: in the Vercel project, open **Storage → Create Database → Neon (Postgres)** and connect it to the project. This sets `DATABASE_URL`, and tables are created automatically on the first request.
+- `.vercelignore` keeps `build.py`, `server.py` and local data out of the deployment.
