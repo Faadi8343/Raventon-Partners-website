@@ -10,6 +10,7 @@ import os
 import re
 import secrets
 import sqlite3
+import sys
 import threading
 import time
 from datetime import datetime, timezone
@@ -19,7 +20,21 @@ from urllib.parse import parse_qs, urlparse
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SQLITE_PATH = os.environ.get("RVN_SQLITE_PATH") or os.path.join(ROOT, "data", "rvn.db")
-PG_URL = os.environ.get("DATABASE_URL") or os.environ.get("POSTGRES_URL")
+
+
+def _find_pg_url():
+    """DATABASE_URL / POSTGRES_URL, also when the Vercel integration added a custom prefix (e.g. STORAGE_DATABASE_URL)."""
+    for key in ("DATABASE_URL", "POSTGRES_URL"):
+        if os.environ.get(key):
+            return os.environ[key]
+    for suffix in ("DATABASE_URL", "POSTGRES_URL"):
+        for key, val in sorted(os.environ.items()):
+            if key.upper().endswith(suffix) and val.startswith(("postgres://", "postgresql://")):
+                return val
+    return None
+
+
+PG_URL = _find_pg_url()
 
 SESSION_DAYS = 30
 PBKDF2_ITERATIONS = 240_000
@@ -176,7 +191,11 @@ def handle(req):
     """Returns (status, payload_dict, set_cookie_or_None)."""
     try:
         init_db()
-    except Exception:
+    except Exception as exc:
+        # log the cause (and which database-like env var NAMES exist, never values) for the runtime logs
+        names = sorted(k for k in os.environ if "DATABASE" in k.upper() or "POSTGRES" in k.upper() or "PG" in k.upper())
+        print(f"[raventon] database unavailable: {type(exc).__name__}: {exc}; pg={bool(PG_URL)}; env names={names}",
+              file=sys.stderr)
         return 503, {"error": "Database is not available. Please try again shortly."}, None
     if req.method == "GET":
         if req.route == "/me":
