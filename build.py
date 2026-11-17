@@ -5,10 +5,10 @@ import glob
 OUT = os.path.dirname(os.path.abspath(__file__))
 BRAND = "Raventon Partners"
 SITE = "https://www.raventonpartners.example"
-FAVICON = ("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E"
-           "%3Crect width='32' height='32' rx='3' fill='%23b6893d'/%3E"
-           "%3Ctext x='16' y='23' font-family='Georgia,serif' font-size='21' font-weight='700' "
-           "text-anchor='middle' fill='%230a1c2e'%3ER%3C/text%3E%3C/svg%3E")
+FAVICON = ("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E"
+           "%3Cpath d='M24 2.5 42.6 13.25v21.5L24 45.5 5.4 34.75v-21.5z' fill='%231F8A6D'/%3E"
+           "%3Cpath d='M13.5 30.5 20 24l4.5 4.5L34 19M28 19h6v6' fill='none' stroke='white' stroke-width='3.6' "
+           "stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E")
 ORG_JSONLD = ('{"@context":"https://schema.org","@type":"ProfessionalService","name":"Raventon Partners",'
               '"description":"Performance marketing agency specialising in Google Ads, Meta Ads, PPC and lead generation.",'
               '"url":"https://www.raventonpartners.example","email":"hello@raventonpartners.example",'
@@ -143,7 +143,64 @@ POSTS = [
                "Once the basics are right, run A/B tests on one element at a time, such as the headline or the form, and let the data guide your next change."]),
 ]
 
+
+_P.update({
+    "plus": '<path d="M12 5v14"/><path d="M5 12h14"/>',
+    "quote": '<path d="M10 6.5c-3.3 1-5.5 3.6-5.5 7.3V18h5.2v-5.2H7.2c.2-2 1.2-3.3 3.4-4.1z"/><path d="M19.5 6.5c-3.3 1-5.5 3.6-5.5 7.3V18h5.2v-5.2h-2.5c.2-2 1.2-3.3 3.4-4.1z"/>',
+})
+
+_P.update({
+    "user": '<circle cx="12" cy="8" r="4"/><path d="M4 20.5c0-4 3.6-6.5 8-6.5s8 2.5 8 6.5"/>',
+    "chev": '<path d="m6 9 6 6 6-6"/>',
+    "lock": '<rect x="4.5" y="10.5" width="15" height="10" rx="2.5"/><path d="M8 10.5V7.5a4 4 0 0 1 8 0v3"/>',
+    "logout": '<path d="M14 4.5h4a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2h-4"/><path d="M10 16.5 5.5 12 10 7.5"/><path d="M5.5 12H16"/>',
+    "grid": '<rect x="3.5" y="3.5" width="7" height="7" rx="2"/><rect x="13.5" y="3.5" width="7" height="7" rx="2"/><rect x="3.5" y="13.5" width="7" height="7" rx="2"/><rect x="13.5" y="13.5" width="7" height="7" rx="2"/>',
+    "eye": '<path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12z"/><circle cx="12" cy="12" r="3"/>',
+    "shield": '<path d="M12 3 4.5 6v5.5c0 4.6 3.2 8.3 7.5 9.5 4.3-1.2 7.5-4.9 7.5-9.5V6z"/><path d="m8.8 12 2.2 2.2 4.2-4.4"/>',
+    "check-sm": '<path d="m5 12.5 4.2 4.2L19 7"/>',
+    "users": '<circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c0-3.6 2.9-6 6.5-6s6.5 2.4 6.5 6"/><circle cx="17" cy="9" r="2.8"/><path d="M16.5 14.2c3 .2 5 2.3 5 5.3"/>',
+    "user-plus2": '<circle cx="10" cy="8" r="4"/><path d="M3 20.5c0-4 3.1-6.5 7-6.5 1.4 0 2.7.3 3.8.9"/><path d="M18.5 14v6"/><path d="M15.5 17h6"/>',
+})
+
 NAV = [("index.html", "Home"), ("about.html", "About Us"), ("services.html", "Services"), ("blog.html", "Blog"), ("contact.html", "Contact")]
+FONTS = ("https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@400;500;600;700;800"
+         "&family=Raleway:wght@500;600;700&display=swap")
+BUDGETS = ["Under $1,000", "$1,000 – $5,000", "$5,000 – $20,000", "$20,000+", "Not sure yet"]
+TRAFFIC = ["Search", "Social media", "Email", "Native & display", "Other"]
+
+
+def mark(uid, size=44):
+    """Brand mark: emerald hexagon with a rising growth line."""
+    return (f'<svg class="mark" width="{size}" height="{size}" viewBox="0 0 48 48" aria-hidden="true" focusable="false">'
+            f'<defs><linearGradient id="{uid}" x1="6" y1="44" x2="42" y2="4" gradientUnits="userSpaceOnUse">'
+            '<stop offset="0" stop-color="#003D31"/><stop offset=".55" stop-color="#1F8A6D"/><stop offset="1" stop-color="#9BE3C6"/></linearGradient></defs>'
+            f'<path d="M24 2.5 42.6 13.25v21.5L24 45.5 5.4 34.75v-21.5z" fill="url(#{uid})"/>'
+            '<path d="M24 7.2 38.5 15.6v16.8L24 40.8 9.5 32.4V15.6z" fill="none" stroke="#fff" stroke-opacity=".22"/>'
+            '<path class="mk-line" d="M13.5 30.5 20 24l4.5 4.5L34 19" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>'
+            '<path class="mk-head" d="M28 19h6v6" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>'
+            '<circle cx="13.5" cy="30.5" r="2.3" fill="#9BE3C6"/></svg>')
+
+
+def logo(uid):
+    return f'<a href="index.html" class="logo" aria-label="{BRAND} home">{mark(uid)}<span class="wm"><b>Raventon</b><small>Partners</small></span></a>'
+
+
+LOGIN_MENU = f"""<div class="dd" id="account">
+<button class="dd-btn" type="button" aria-expanded="false" aria-haspopup="true">{ic("user", 16)}<span class="dd-label">Login</span>{ic("chev", 14, "chev")}</button>
+<div class="dd-menu" role="menu">
+<div class="dd-guest">
+<small>Sign in</small>
+<a role="menuitem" href="advertiser-login.html"><i>{ic("megaphone", 18)}</i><span>Advertiser Login<em>Campaigns, leads &amp; reports</em></span></a>
+<a role="menuitem" href="publisher-login.html"><i>{ic("globe", 18)}</i><span>Publisher Login<em>Offers, traffic &amp; payouts</em></span></a>
+<small>New here?</small>
+<a role="menuitem" href="advertiser-register.html"><i>{ic("user-plus2", 18)}</i><span>Advertiser Register</span></a>
+<a role="menuitem" href="publisher-register.html"><i>{ic("user-plus2", 18)}</i><span>Publisher Register</span></a>
+</div>
+<div class="dd-user" hidden>
+<a role="menuitem" href="dashboard.html"><i>{ic("grid", 18)}</i><span>Dashboard</span></a>
+<button role="menuitem" type="button" class="js-logout"><i>{ic("logout", 18)}</i><span>Sign out</span></button>
+</div>
+</div></div>"""
 
 
 def head(title, desc, active, depth=""):
@@ -156,7 +213,7 @@ def head(title, desc, active, depth=""):
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>{title} | {BRAND}</title>
 <meta name="description" content="{desc}">
-<meta name="theme-color" content="#0a1c2e">
+<meta name="theme-color" content="#000000">
 <link rel="icon" href="{FAVICON}">
 <link rel="canonical" href="{SITE}/{active or 'index.html'}">
 <meta property="og:type" content="website"><meta property="og:site_name" content="{BRAND}">
@@ -165,16 +222,18 @@ def head(title, desc, active, depth=""):
 <meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="{title} | {BRAND}">
 <meta name="twitter:description" content="{desc}">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600;8..60,700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/style.css"><link rel="stylesheet" href="assets/extras.css"><link rel="stylesheet" href="assets/extras3.css"><link rel="stylesheet" href="assets/extras4.css"><link rel="stylesheet" href="assets/extras5.css"><link rel="stylesheet" href="assets/extras6.css"><link rel="stylesheet" href="assets/extras9.css">
+<link href="{FONTS}" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+<script>(function(h){{h.classList.add('js');try{{if(sessionStorage.getItem('rvn-pre'))h.classList.add('no-pre');sessionStorage.setItem('rvn-pre','1')}}catch(e){{h.classList.add('no-pre')}}}})(document.documentElement)</script>
 <script type="application/ld+json">{ORG_JSONLD}</script>
 </head><body>
+<div class="preloader" aria-hidden="true"><div class="pl-in">{mark("mk-pl", 72)}<span class="pl-name">Raventon <em>Partners</em></span><span class="pl-bar"><i></i></span></div></div>
 <a class="skip" href="#main">Skip to content</a>
 <div class="progress"></div>
 <header class="nav"><div class="wrap">
-<a href="index.html" class="logo"><i>R</i>Raventon Partners</a>
+{logo("mk-h")}
 <button class="burger" aria-label="Menu" aria-expanded="false" aria-controls="menu"><span></span><span></span><span></span></button>
-<nav class="menu" id="menu">{links}<a href="contact.html" class="btn btn-primary">Free Audit</a></nav>
+<nav class="menu" id="menu">{links}{LOGIN_MENU}<a href="contact.html" class="btn btn-primary">Free Audit</a></nav>
 </div></header>
 <main id="main">
 """
@@ -185,42 +244,50 @@ def foot():
     return f"""</main>
 <footer><div class="wrap">
 <div class="fgrid">
-<div><a href="index.html" class="logo"><i>R</i>Raventon Partners</a>
+<div>{logo("mk-f")}
 <p>A performance marketing agency specialising in Google Ads, Meta Ads, PPC and lead generation for ambitious businesses.</p>
 <div class="soc"><a href="#" aria-label="LinkedIn">{brand_ic("linkedin")}</a><a href="#" aria-label="Facebook">{brand_ic("facebook")}</a><a href="#" aria-label="Instagram">{brand_ic("instagram")}</a><a href="#" aria-label="X">{brand_ic("x")}</a></div></div>
 <div><h4>Company</h4><ul><li><a href="index.html">Home</a></li><li><a href="about.html">About Us</a></li><li><a href="blog.html">Blog</a></li><li><a href="contact.html">Contact</a></li></ul></div>
 <div><h4>Services</h4><ul>{svc}</ul></div>
-<div><h4>Get in touch</h4><ul><li>hello@raventonpartners.example</li><li>+1 (555) 014-2290</li><li>221 Market Street, Suite 400<br>Austin, TX 78701</li></ul></div>
+<div><h4>Get in touch</h4><ul class="contact-list"><li>{ic("mail", 17)}<span>hello@raventonpartners.example</span></li><li>{ic("phone", 17)}<span>+1 (555) 014-2290</span></li><li>{ic("pin", 17)}<span>221 Market Street, Suite 400<br>Austin, TX 78701</span></li></ul>
+<div class="f-acc"><a href="advertiser-login.html">Advertiser Login</a><a href="publisher-login.html">Publisher Login</a></div></div>
 </div>
 <div class="copy"><span>© 2026 {BRAND}. All rights reserved.</span><span><a href="privacy-policy.html">Privacy Policy</a> &nbsp;·&nbsp; <a href="terms-conditions.html">Terms &amp; Conditions</a></span></div>
-</div></footer>
+</div><div class="fwm" aria-hidden="true">Raventon Partners</div></footer>
 <button class="top" aria-label="Back to top">{ic("arrow-up", 18)}</button>
-<script src="assets/main.js"></script><script src="assets/extras.js"></script><script src="assets/extras4.js"></script><script src="assets/extras5.js"></script><script src="assets/extras6.js"></script><script type="module" src="assets/extras8.js"></script>
+<script src="assets/main.js"></script>
 </body></html>"""
 
 
 def page_hero(title, sub, crumb):
-    return f"""<div class="page-hero"><div class="wrap rv">
-<div class="crumbs"><a href="index.html">Home</a> / {crumb}</div>
-<h1>{title}</h1><p>{sub}</p></div></div>"""
+    return f"""<div class="page-hero"><div class="ph-art" aria-hidden="true"><i></i><i></i><i></i></div><div class="wrap">
+<div class="crumbs ld" style="--d:0"><a href="index.html">Home</a> / {crumb}</div>
+<h1 class="ld" style="--d:1">{title}</h1><p class="ld" style="--d:2">{sub}</p></div></div>"""
 
 
 def cta():
-    return f"""<section><div class="wrap"><div class="cta rv">
+    return f"""<section class="cta-band"><div class="wrap"><div class="cta rv zoom"><i class="ring r1" aria-hidden="true"></i><i class="ring r2" aria-hidden="true"></i>
 <h2>Ready to get more leads?</h2>
 <p>Get a free audit of your ad account and a clear plan to lower your cost per lead. We reply within one business day.</p>
-<a href="contact.html" class="btn">Get Your Free Audit {ARR}</a></div></div></section>"""
+<a href="contact.html" class="btn btn-light">Get Your Free Audit {ARR}</a></div></div></section>"""
 
 
 def svc_cards():
-    return "".join(f"""<div class="svc rv"><div class="ico">{ic(s['icon'])}</div><h3>{s['name']}</h3><p>{s['short']}</p>
-<a class="more" href="services-{s['slug']}.html">Learn more {ARR}</a></div>""" for s in SERVICES)
+    return "".join(f"""<div class="flip rv" tabindex="0"><div class="flip-in">
+<div class="face front"><div class="ico">{ic(s['icon'], 30)}</div><h3>{s['name']}</h3><span class="hint" aria-hidden="true">{ic("plus", 18)}</span></div>
+<div class="face back"><h3>{s['name']}</h3><p>{s['short']}</p><a class="btn btn-light" href="services-{s['slug']}.html">Learn more {ARR}</a></div>
+</div></div>""" for s in SERVICES)
 
 
 def post_cards(posts):
-    return "".join(f"""<article class="post rv"><div class="thumb {p['t']}">{ic(p['e'], 40)}</div><div class="body">
-<div class="meta">{p['date']} · {p['cat']}</div><h3>{p['title']}</h3><p>{p['desc']}</p>
+    return "".join(f"""<article class="post rv"><a class="thumb {p['t']}" href="blog-{p['slug']}.html" tabindex="-1" aria-hidden="true">{ic(p['e'], 44)}</a><div class="body">
+<div class="meta">{p['date']} · {p['cat']}</div><h3><a href="blog-{p['slug']}.html">{p['title']}</a></h3><p>{p['desc']}</p>
 <a class="more" href="blog-{p['slug']}.html">Read article {ARR}</a></div></article>""" for p in posts)
+
+
+def stats(items, cls=""):
+    cells = "".join(f'<div class="rv"><b data-count="{n}" data-suffix="{suf}">0</b><span>{label}</span></div>' for n, suf, label in items)
+    return f'<section class="stats{cls}"><div class="wrap grid g4">{cells}</div></section>'
 
 
 def write(name, html):
@@ -234,12 +301,14 @@ for old in glob.glob(os.path.join(OUT, "services-*.html")) + glob.glob(os.path.j
 
 PLATFORMS = ["Google Ads", "Meta Ads", "LinkedIn Ads", "Google Analytics 4", "Tag Manager", "Looker Studio"]
 PLAT = "".join(f"<span>{x}</span>" for x in PLATFORMS)
+# the track is repeated so the marquee loops seamlessly; copies are hidden from screen readers
+MARQUEE = f'<div class="marquee"><div class="marquee-track"><div class="mq-set">{PLAT}{PLAT}</div><div class="mq-set" aria-hidden="true">{PLAT}{PLAT}</div></div></div>'
 
 # sample case studies: replace with real client results before publishing
-WORKS = [("building", "Lumio Realty", "Real estate · Meta Lead Ads", "Lower cost per lead and more booked viewings", "linear-gradient(150deg,#0a1c2e,#1b4e7c)"),
-         ("cart", "Orbitly Store", "E-commerce · Google Shopping", "Stronger ROAS from Shopping and remarketing", "linear-gradient(150deg,#123049,#2c6f9e)"),
-         ("medical", "Kestrel Dental", "Healthcare · Google Search", "More appointment requests from local search", "linear-gradient(150deg,#15222e,#5d7a93)")]
-WORKS_HTML = "".join(f'<div class="work rv zoom" style="background:{g}"><div class="big">{ic(i, 30)}</div><small>{c}</small><h3>{n}</h3><small>{r}</small></div>' for i, n, c, r, g in WORKS)
+WORKS = [("building", "Lumio Realty", "Real estate · Meta Lead Ads", "Lower cost per lead and more booked viewings"),
+         ("cart", "Orbitly Store", "E-commerce · Google Shopping", "Stronger ROAS from Shopping and remarketing"),
+         ("medical", "Kestrel Dental", "Healthcare · Google Search", "More appointment requests from local search")]
+WORKS_HTML = "".join(f'<div class="work rv"><div class="big">{ic(i, 30)}</div><small class="tag">{c}</small><h3>{n}</h3><small>{r}</small><span class="go" aria-hidden="true">{ic("arrow-right", 18)}</span></div>' for i, n, c, r in WORKS)
 
 HOME_FAQ = [("How much should I spend on ads?", "It depends on your market and what a lead or sale is worth. We work backwards from your target cost per lead and the volume you want, then recommend a budget and a clear test plan."),
             ("Should I use Google Ads or Meta Ads?", "Google Ads reaches people who are already searching for what you sell. Meta Ads reaches people earlier, based on interests and behaviour. Many businesses use both, and we will recommend the right starting point after a short audit."),
@@ -248,56 +317,49 @@ HOME_FAQ = [("How much should I spend on ads?", "It depends on your market and w
             ("How do you report performance?", "You get a live dashboard, a weekly summary and a monthly strategy call covering results, learnings and next steps.")]
 FAQ_HTML = "".join(f"<details class='rv'><summary>{q}</summary><p>{a}</p></details>" for q, a in HOME_FAQ)
 
+QUOTE = f'<span class="qmark" aria-hidden="true">{ic("quote", 56)}</span>'
+
+svc_tiles = "".join(f'<label class="q-tile"><input type="radio" name="service" value="{s["name"]}"{" checked" if i == 0 else ""}><span><i>{ic(s["icon"], 20)}</i><b>{s["name"].split(" (")[0]}</b><em aria-hidden="true">{ic("check-sm", 12)}</em></span></label>' for i, s in enumerate(SERVICES))
+bud_chips = "".join(f'<label class="chip q-chip"><input type="radio" name="budget" value="{b}"{" checked" if i == 0 else ""}><span>{b}</span></label>' for i, b in enumerate(BUDGETS))
+
 # ---------- HOME ----------
 home = head("Google Ads, Meta Ads, PPC & Lead Generation", "Raventon Partners is a performance marketing agency specialising in Google Ads, Meta Ads, PPC and lead generation.", "index.html") + f"""
-<section class="hero"><div class="wrap hero-grid">
-<div><span class="eyebrow">Performance marketing agency</span>
-<h1>We turn advertising budgets into <span class="grad-text">measurable growth</span></h1>
-<p class="lead">Google Ads, Meta Ads, PPC and lead generation, managed by specialists who focus on one thing: more of the right customers at a lower cost.</p>
-<div class="hero-btns"><a href="contact.html" class="btn btn-primary">Get Free Ad Audit {ARR}</a><a href="services.html" class="btn btn-ghost">Our Services</a></div></div>
-<div class="hero-visual">
-<div class="stage" id="stage">
-<div class="layer swatch" data-depth="20"><div class="in"><i style="background:#4285f4"></i><i style="background:#ea4335"></i><i style="background:#fbbc05"></i><i style="background:#34a853"></i><i style="background:#0866ff"></i></div></div>
-<div class="layer dashw" data-depth="12"><div class="in">
-<div class="dh"><i></i><i></i><i></i><span>Campaign performance</span></div>
-<div class="kpis"><div><small>Leads this month</small><b>1,284</b></div><div><small>Cost per lead</small><b class="up">−31%</b></div></div>
-<svg class="chart" viewBox="0 0 300 100" preserveAspectRatio="none"><defs><linearGradient id="lg" x1="0" x2="1"><stop offset="0" stop-color="#124c7e"/><stop offset="1" stop-color="#b6893d"/></linearGradient><linearGradient id="ar" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#124c7e" stop-opacity=".2"/><stop offset="1" stop-color="#124c7e" stop-opacity="0"/></linearGradient></defs>
-<path class="area" d="M0 80 C30 70 50 40 80 50 S130 75 160 45 S220 20 250 30 S290 10 300 8 L300 100 L0 100Z" fill="url(#ar)"/>
-<path class="line" d="M0 80 C30 70 50 40 80 50 S130 75 160 45 S220 20 250 30 S290 10 300 8" fill="none" stroke="url(#lg)" stroke-width="3" stroke-linecap="round"/></svg>
-<div class="bars"><i style="--h:45%;--d:1"></i><i style="--h:70%;--d:2"></i><i style="--h:55%;--d:3"></i><i style="--h:90%;--d:4"></i><i style="--h:65%;--d:5"></i><i style="--h:100%;--d:6"></i><i style="--h:80%;--d:7"></i></div>
-</div></div>
-<div class="layer phoneh" data-depth="28"><div class="in"><div class="pscreen">
-<div class="ph"><i></i><span>New leads</span></div>
-<div class="row" style="--c:#4285f4"><u></u><s></s></div><div class="row" style="--c:#0866ff"><u></u><s></s></div><div class="row" style="--c:#34a853"><u></u><s></s></div><div class="row" style="--c:#5d7a93"><u></u><s></s></div>
-<div class="pbtn"></div></div></div></div>
-<div class="layer toast tst1" data-depth="42"><div class="in"><em>{ic("user-plus", 18)}</em><div><b>New lead</b><small>From Meta Lead Ads</small></div></div></div>
-<div class="layer toast tst2" data-depth="36"><div class="in"><em>{ic("trend-up", 18)}</em><div><b>ROAS is up</b><small>Google Ads campaign</small></div></div></div>
-</div>
-</div></div></section>
+<section class="hero"><i class="glow g1" aria-hidden="true"></i><i class="glow g2" aria-hidden="true"></i><div class="wrap hero-grid">
+<div><span class="eyebrow ld" style="--d:0">Performance marketing agency</span>
+<h1 class="ld" style="--d:1">We turn advertising budgets into <span class="grad-text">measurable growth</span></h1>
+<p class="lead ld" style="--d:2">Google Ads, Meta Ads, PPC and lead generation, managed by specialists who focus on one thing: more of the right customers at a lower cost.</p>
+<div class="hero-btns ld" style="--d:3"><a href="contact.html" class="btn btn-primary">Get Free Ad Audit {ARR}</a><a href="services.html" class="btn btn-ghost">Our Services</a></div>
+<div class="trust ld" style="--d:4"><span class="avs"><i>SM</i><i>DK</i><i>AR</i></span><span class="tr-t">{STARS}<small>4.9 client rating</small></span></div></div>
+<form class="qcard ld" style="--d:2" action="contact.html" method="get" id="quickAudit">
+<div class="q-top"><span class="q-badge">{ic("shield", 14)} Free audit</span><span class="q-count" aria-live="polite"><b>01</b> / 02</span></div>
+<div class="qhead"><h3>Get Your Free Audit</h3><p>Tell us about your business and goals. We reply within one business day.</p></div>
+<div class="q-prog" aria-hidden="true"><i></i></div>
+<fieldset class="q-pane" data-step="1"><legend><b>1</b>Service</legend><div class="q-tiles">{svc_tiles}</div></fieldset>
+<fieldset class="q-pane" data-step="2"><legend><b>2</b>Monthly ad budget</legend><div class="chips">{bud_chips}</div></fieldset>
+<div class="q-nav"><button type="button" class="q-back" hidden>{ic("arrow-left", 16)} Back</button><button type="button" class="btn btn-primary q-next" hidden>Continue {ARR}</button><button class="btn btn-primary q-submit" type="submit">Request Free Audit {ARR}</button></div>
+<div class="q-foot">{ic("lock", 14)} Private and secure. We reply within one business day.</div>
+</form>
+</div></section>
 
-<div class="logos"><div class="wrap"><small>Certified expertise across the platforms that drive growth</small>
-<div class="plat">{PLAT}</div></div></div>
+{stats([(250, "+", "Campaigns launched"), (120, "+", "Brands served"), (40, "%", "Avg. lower cost per lead"), (95, "%", "Client retention")])}
 
-<section><div class="wrap split">
-<div class="art rv"><div class="mini m1">{ic("target", 16)} Lead-focused</div><div class="badge"><b>8+</b>Years running paid ads</div><div class="mini m2">{ic("bars", 16)} Data-driven</div></div>
+<div class="logos"><div class="wrap"><h2 class="rv">Certified expertise across the platforms that drive growth</h2></div>
+{MARQUEE}</div>
+
+<section class="dark band-alt"><div class="wrap split">
+<div class="art rv zoom"><i class="orbit" aria-hidden="true"></i><div class="mini m1">{ic("target", 16)} Lead-focused</div><div class="badge"><b>8+</b>Years running paid ads</div><div class="mini m2">{ic("bars", 16)} Data-driven</div></div>
 <div class="rv"><span class="eyebrow">About us</span><h2>Paid advertising built around your return</h2>
 <p>Raventon Partners is a team of paid media specialists, creatives and analysts. We plan, launch and optimise Google Ads and Meta Ads campaigns, and we judge our work by one measure: the leads and sales it brings you.</p>
 <ul class="checks"><li>Specialists in search, social and lead generation</li><li>Transparent reporting you can check any time</li><li>You own your ad accounts and your data</li></ul>
-<br><a href="about.html" class="btn btn-dark">More about us {ARR}</a></div></div></section>
+<a href="about.html" class="btn btn-primary">More about us {ARR}</a></div></div></section>
 
 <section class="bg-soft"><div class="wrap">
 <div class="sec-head center rv"><span class="eyebrow">What we do</span><h2>Services built to generate leads</h2><p>Everything you need to find, win and keep customers through paid advertising.</p></div>
-<div class="grid g3">{svc_cards()}</div></div></section>
+<div class="grid g3 svc-grid snap">{svc_cards()}</div></div></section>
 
-<section class="stats"><div class="wrap grid g4">
-<div><b data-count="250" data-suffix="+">0</b><span>Campaigns launched</span></div>
-<div><b data-count="120" data-suffix="+">0</b><span>Brands served</span></div>
-<div><b data-count="40" data-suffix="%">0</b><span>Avg. lower cost per lead</span></div>
-<div><b data-count="95" data-suffix="%">0</b><span>Client retention</span></div></div></section>
-
-<section><div class="wrap">
+<section class="dark"><div class="wrap">
 <div class="sec-head center rv"><span class="eyebrow">How we work</span><h2>A simple, proven process</h2><p>Clear steps from the first audit to scaling what works, with reporting at every stage.</p></div>
-<div class="grid g4">
+<div class="grid g4 steps">
 <div class="step rv"><div class="n">01</div><h3>Audit &amp; strategy</h3><p>We review your accounts, set up tracking and agree goals, audiences and budget.</p></div>
 <div class="step rv"><div class="n">02</div><h3>Launch &amp; test</h3><p>We launch focused campaigns and test ads, audiences and offers against each other.</p></div>
 <div class="step rv"><div class="n">03</div><h3>Optimise</h3><p>We cut waste, improve lead quality and shift budget to what performs.</p></div>
@@ -305,19 +367,19 @@ home = head("Google Ads, Meta Ads, PPC & Lead Generation", "Raventon Partners is
 
 <section><div class="wrap">
 <div class="sec-head center rv"><span class="eyebrow">Our work</span><h2>Sample campaign results</h2><p>The kinds of campaigns we plan and run for our clients across different industries.</p></div>
-<div class="grid g3">{WORKS_HTML}</div></div></section>
+<div class="grid g3 snap">{WORKS_HTML}</div></div></section>
 
 <section class="bg-soft"><div class="wrap">
 <div class="sec-head center rv"><span class="eyebrow">Testimonials</span><h2>What our clients say</h2></div>
-<div class="grid g3">
-<div class="quote rv">{STARS}<p>"Our cost per lead dropped within two months and the leads we get now are actually ready to talk. Reporting is clear and honest."</p><div class="who"><i>SM</i><div><b>Sarah Mitchell</b><small>Marketing Director, Lumio</small></div></div></div>
-<div class="quote rv">{STARS}<p>"They fixed our tracking, rebuilt our campaigns and finally showed us which ads bring sales. We now know where every dollar goes."</p><div class="who"><i>DK</i><div><b>Daniel Kim</b><small>Founder, Orbitly</small></div></div></div>
-<div class="quote rv">{STARS}<p>"Our appointment bookings from Google and Instagram have become steady and predictable. The team responds quickly and always has a plan."</p><div class="who"><i>AR</i><div><b>Ana Rodriguez</b><small>Practice Manager, Kestrel</small></div></div></div>
+<div class="grid g3 snap">
+<div class="quote rv">{QUOTE}{STARS}<p>"Our cost per lead dropped within two months and the leads we get now are actually ready to talk. Reporting is clear and honest."</p><div class="who"><i>SM</i><div><b>Sarah Mitchell</b><small>Marketing Director, Lumio</small></div></div></div>
+<div class="quote rv">{QUOTE}{STARS}<p>"They fixed our tracking, rebuilt our campaigns and finally showed us which ads bring sales. We now know where every dollar goes."</p><div class="who"><i>DK</i><div><b>Daniel Kim</b><small>Founder, Orbitly</small></div></div></div>
+<div class="quote rv">{QUOTE}{STARS}<p>"Our appointment bookings from Google and Instagram have become steady and predictable. The team responds quickly and always has a plan."</p><div class="who"><i>AR</i><div><b>Ana Rodriguez</b><small>Practice Manager, Kestrel</small></div></div></div>
 </div></div></section>
 
 <section><div class="wrap">
 <div class="sec-head center rv"><span class="eyebrow">From the blog</span><h2>Latest insights</h2></div>
-<div class="grid g3">{post_cards(POSTS)}</div></div></section>
+<div class="grid g3 snap">{post_cards(POSTS)}</div></div></section>
 
 <section class="bg-soft"><div class="wrap">
 <div class="sec-head center rv"><span class="eyebrow">FAQ</span><h2>Questions we often hear</h2></div>
@@ -329,16 +391,16 @@ write("index.html", home)
 # ---------- ABOUT ----------
 about = head("About Us", "Learn about Raventon Partners, our mission, values and team.", "about.html") + page_hero("About Us", "We are a performance marketing agency on a mission to turn ad budgets into measurable growth.", "About Us") + f"""
 <section><div class="wrap split">
-<div class="rv"><span class="eyebrow">Our story</span><h2>Built by marketers, driven by results</h2>
+<div class="rv left"><span class="eyebrow">Our story</span><h2>Built by marketers, driven by results</h2>
 <p>Raventon Partners started in 2018 when a small group of paid media specialists got tired of agencies that reported clicks instead of customers. We set out to build an agency that is accountable for leads and sales.</p>
 <p>Today we manage Google Ads, Meta Ads and lead generation campaigns for businesses across 12 countries. We stay close to the numbers, test constantly and share what we learn with our clients.</p>
 <ul class="checks"><li>Founded in 2018, remote-first team</li><li>250+ campaigns launched</li><li>Specialists in search, social and lead generation</li></ul></div>
-<div class="art rv"><div class="mini m1">{ic("globe", 16)} 12 countries</div><div class="badge"><b>25</b>Marketing specialists</div><div class="mini m2">{ic("star", 16)} 4.9 client rating</div></div></div></section>
+<div class="art rv zoom"><i class="orbit" aria-hidden="true"></i><div class="mini m1">{ic("globe", 16)} 12 countries</div><div class="badge"><b>25</b>Marketing specialists</div><div class="mini m2">{ic("star", 16)} 4.9 client rating</div></div></div></section>
 
 <section class="bg-soft"><div class="wrap">
 <div class="grid g2">
-<div class="svc rv"><div class="ico">{ic("target")}</div><h3>Our mission</h3><p>To help businesses grow through paid advertising that is transparent, accountable and tied to real revenue.</p></div>
-<div class="svc rv"><div class="ico">{ic("compass")}</div><h3>Our vision</h3><p>To be the most trusted performance marketing partner for ambitious companies, known for honest reporting and lasting results.</p></div></div></div></section>
+<div class="svc rv"><div class="ico">{ic("target", 30)}</div><h3>Our mission</h3><p>To help businesses grow through paid advertising that is transparent, accountable and tied to real revenue.</p></div>
+<div class="svc svc-dark rv"><div class="ico">{ic("compass", 30)}</div><h3>Our vision</h3><p>To be the most trusted performance marketing partner for ambitious companies, known for honest reporting and lasting results.</p></div></div></div></section>
 
 <section><div class="wrap">
 <div class="sec-head center rv"><span class="eyebrow">Our values</span><h2>What guides us</h2></div>
@@ -351,25 +413,21 @@ about = head("About Us", "Learn about Raventon Partners, our mission, values and
 <section class="bg-soft"><div class="wrap">
 <div class="sec-head center rv"><span class="eyebrow">Our journey</span><h2>How we got here</h2></div>
 <div class="timeline">
-<div class="tl rv left"><b>2018</b><h3>Raventon Partners is founded</h3><p>We start by managing Google Ads for local service businesses.</p></div>
-<div class="tl rv left"><b>2020</b><h3>Paid social team launches</h3><p>We add Meta Ads specialists and creative production for Facebook and Instagram.</p></div>
-<div class="tl rv left"><b>2022</b><h3>Lead generation systems</h3><p>We build funnels with landing pages, CRM integrations and follow-up automation.</p></div>
-<div class="tl rv left"><b>2024</b><h3>Serving 12 countries</h3><p>The team grows to 25 specialists working across many industries.</p></div>
-<div class="tl rv left"><b>2026</b><h3>250+ campaigns launched</h3><p>Today we partner with brands on long-term, full-funnel paid growth.</p></div>
+<div class="tl rv"><b>2018</b><h3>Raventon Partners is founded</h3><p>We start by managing Google Ads for local service businesses.</p></div>
+<div class="tl rv"><b>2020</b><h3>Paid social team launches</h3><p>We add Meta Ads specialists and creative production for Facebook and Instagram.</p></div>
+<div class="tl rv"><b>2022</b><h3>Lead generation systems</h3><p>We build funnels with landing pages, CRM integrations and follow-up automation.</p></div>
+<div class="tl rv"><b>2024</b><h3>Serving 12 countries</h3><p>The team grows to 25 specialists working across many industries.</p></div>
+<div class="tl rv"><b>2026</b><h3>250+ campaigns launched</h3><p>Today we partner with brands on long-term, full-funnel paid growth.</p></div>
 </div></div></section>
 
-<section class="stats"><div class="wrap grid g4">
-<div><b data-count="250" data-suffix="+">0</b><span>Campaigns launched</span></div>
-<div><b data-count="120" data-suffix="+">0</b><span>Brands served</span></div>
-<div><b data-count="25" data-suffix="">0</b><span>Specialists on the team</span></div>
-<div><b data-count="8" data-suffix="+">0</b><span>Years in business</span></div></div></section>
+{stats([(250, "+", "Campaigns launched"), (120, "+", "Brands served"), (25, "", "Specialists on the team"), (8, "+", "Years in business")], " dark")}
 
 <section><div class="wrap">
 <div class="sec-head center rv"><span class="eyebrow">Leadership</span><h2>Meet the team</h2></div>
-<div class="grid g3">
-<div class="quote rv"><div class="who"><i>JH</i><div><b>James Harlow</b><small>Founder &amp; CEO</small></div></div><p style="margin-top:18px">Paid media strategist who leads the agency and works directly with our biggest accounts.</p></div>
-<div class="quote rv"><div class="who"><i>PN</i><div><b>Priya Nair</b><small>Head of Paid Social</small></div></div><p style="margin-top:18px">Leads Meta Ads strategy and creative testing across Facebook and Instagram.</p></div>
-<div class="quote rv"><div class="who"><i>OB</i><div><b>Omar Bashir</b><small>Head of Search &amp; Analytics</small></div></div><p style="margin-top:18px">Oversees Google Ads, tracking and reporting so every decision is backed by data.</p></div></div></div></section>
+<div class="grid g3 team">
+<div class="quote rv"><div class="who"><i>JH</i><div><b>James Harlow</b><small>Founder &amp; CEO</small></div></div><p>Paid media strategist who leads the agency and works directly with our biggest accounts.</p></div>
+<div class="quote rv"><div class="who"><i>PN</i><div><b>Priya Nair</b><small>Head of Paid Social</small></div></div><p>Leads Meta Ads strategy and creative testing across Facebook and Instagram.</p></div>
+<div class="quote rv"><div class="who"><i>OB</i><div><b>Omar Bashir</b><small>Head of Search &amp; Analytics</small></div></div><p>Oversees Google Ads, tracking and reporting so every decision is backed by data.</p></div></div></div></section>
 {cta()}
 """ + foot()
 write("about.html", about)
@@ -377,7 +435,7 @@ write("about.html", about)
 # ---------- SERVICES ----------
 VISUALS = {
     "google-ads": '<div class="mock serp"><div class="sbar"><span>'+ic("search",16)+'</span> emergency plumber near me</div><div class="ad"><small><b>Ad</b> · example-plumbing.com</small><h5>24/7 Emergency Plumber – Fast Response</h5><p>Call now for a free quote. Licensed and insured.</p></div><div class="res"></div><div class="res short"></div></div>',
-    "meta-ads": '<div class="mock phone"><div class="notch"></div><div class="ps"><div class="av"></div><div class="l1"></div><div class="l2"></div><div class="card adimg"></div><div class="cta-pill"></div><div class="nav"><i></i><i></i><i></i><i></i></div></div></div>',
+    "meta-ads": '<div class="mock phone"><div class="notch"></div><div class="ps"><div class="av"></div><div class="l1"></div><div class="l2"></div><div class="card adimg"></div><div class="cta-pill"></div><div class="pnav"><i></i><i></i><i></i><i></i></div></div></div>',
     "ppc-management": '<div class="mock browser"><div class="bt"><i></i><i></i><i></i><span>ads.raventonpartners.io</span></div><div class="bb"><div class="kp"><div><small>Clicks</small><b>12.4K</b></div><div><small>CPA</small><b>$18</b></div><div><small>ROAS</small><b>4.8x</b></div></div><div class="minibars"><i style="--h:40%"></i><i style="--h:62%"></i><i style="--h:50%"></i><i style="--h:80%"></i><i style="--h:70%"></i><i style="--h:100%"></i></div></div></div>',
     "lead-generation": '<div class="mock funnel"><div class="fu f1">Ad clicks</div><div class="fu f2">Leads</div><div class="fu f3">Qualified</div><div class="fu f4">Customers</div></div>',
     "landing-pages-cro": '<div class="mock browser"><div class="bt"><i></i><i></i><i></i><span>offer.yoursite.com</span></div><div class="bb"><div class="l1"></div><div class="l2"></div><div class="cols"><div></div><div></div><div></div></div><div class="l3"></div></div></div>',
@@ -387,11 +445,11 @@ rows = ""
 for i, s in enumerate(SERVICES):
     pts = "".join(f"<li>{p}</li>" for p in s["points"][:4])
     tags = "".join(f"<span>{t}</span>" for t in s["tech"][:5])
-    flip = " flip" if i % 2 else ""
-    rows += f"""<div class="srow{flip}">
+    rev = " rev" if i % 2 else ""
+    rows += f"""<div class="srow{rev}">
 <div class="stext rv {'right' if i % 2 else 'left'}"><div class="snum">{i + 1:02d}</div><h2>{s['name']}</h2><p class="sint">{s['intro']}</p>
 <ul class="checks">{pts}</ul><div class="tags">{tags}</div>
-<a href="services-{s['slug']}.html" class="btn btn-dark" style="margin-top:26px">Explore {s['name'].split(' (')[0]} {ARR}</a></div>
+<a href="services-{s['slug']}.html" class="btn btn-dark">Explore {s['name'].split(' (')[0]} {ARR}</a></div>
 <div class="svis rv zoom">{VISUALS[s['slug']]}</div></div>"""
 
 INDUSTRIES = [("building", "Real Estate"), ("cart", "E-commerce"), ("medical", "Healthcare & Dental"), ("graduation", "Education"), ("wrench", "Home Services"), ("card", "Finance & Insurance"), ("laptop", "SaaS & B2B"), ("plane", "Travel & Hospitality")]
@@ -399,8 +457,8 @@ ind = "".join(f'<div class="ind rv"><span>{ic(e, 22)}</span><b>{n}</b></div>' fo
 
 services = head("Our Services", "Google Ads, Meta Ads, PPC management, lead generation and landing page optimisation.", "services.html") + page_hero("Our Services", "Google Ads, Meta Ads, PPC and lead generation, managed by specialists who focus on your return.", "Services") + f"""
 <section class="sv-intro"><div class="wrap"><div class="intro-grid">
-<div class="rv"><span class="eyebrow">What we do</span><h2>One partner for paid growth</h2></div>
-<div class="rv"><p>We help businesses find customers through paid advertising. Our team covers strategy, tracking, creative, campaign management and the landing pages that turn clicks into leads, so every part of the funnel works together.</p>
+<div class="rv left"><span class="eyebrow">What we do</span><h2>One partner for paid growth</h2></div>
+<div class="rv right"><p>We help businesses find customers through paid advertising. Our team covers strategy, tracking, creative, campaign management and the landing pages that turn clicks into leads, so every part of the funnel works together.</p>
 <div class="mini-stats"><div><b data-count="250" data-suffix="+">0</b><span>Campaigns</span></div><div><b data-count="12" data-suffix="">0</b><span>Countries</span></div><div><b data-count="95" data-suffix="%">0</b><span>Retention</span></div></div></div>
 </div></div></section>
 
@@ -420,15 +478,15 @@ services = head("Our Services", "Google Ads, Meta Ads, PPC management, lead gene
 <div class="sec-head center rv"><span class="eyebrow">Industries</span><h2>Experience across sectors</h2><p>We bring lessons from many industries to every new account.</p></div>
 <div class="ind-grid">{ind}</div></div></section>
 
-<section class="sv-why"><div class="wrap split">
-<div class="rv"><span class="eyebrow">Why Raventon Partners</span><h2>Built on trust and clear numbers</h2>
+<section class="dark sv-why"><div class="wrap split">
+<div class="rv left"><span class="eyebrow">Why Raventon Partners</span><h2>Built on trust and clear numbers</h2>
 <p>Our clients stay with us because they always know what their money is doing.</p>
 <ul class="checks"><li>Specialists in Google, Meta and lead generation</li><li>You own your ad accounts and data</li><li>Conversion tracking set up before spend scales</li><li>Weekly updates and a monthly strategy call</li><li>Focus on cost per qualified lead, not vanity metrics</li></ul></div>
-<div class="why-cards rv">
-<div class="wc"><b>24h</b><span>Average response time</span></div>
-<div class="wc"><b>Weekly</b><span>Performance updates</span></div>
-<div class="wc"><b>100%</b><span>Account ownership is yours</span></div>
-<div class="wc"><b>Monthly</b><span>Strategy calls</span></div>
+<div class="why-cards">
+<div class="wc rv"><b>24h</b><span>Average response time</span></div>
+<div class="wc rv"><b>Weekly</b><span>Performance updates</span></div>
+<div class="wc rv"><b>100%</b><span>Account ownership is yours</span></div>
+<div class="wc rv"><b>Monthly</b><span>Strategy calls</span></div>
 </div></div></section>
 {cta()}
 """ + foot()
@@ -442,9 +500,9 @@ for s in SERVICES:
     faq = "".join(f"<details><summary>{q}</summary><p>{a}</p></details>" for q, a in s["faq"])
     html = head(s["name"], s["short"], "services.html") + page_hero(s["name"], s["short"], f'<a href="services.html">Services</a> / {s["name"]}') + f"""
 <section><div class="wrap detail">
-<div class="rv"><h2>Overview</h2><p>{s['intro']}</p>
-<h2>What's included</h2><ul class="checks">{pts}</ul>
-<h2>How it works</h2><div class="grid g2" style="margin-bottom:10px">
+<div class="rv"><h2>Overview</h2><p class="sint">{s['intro']}</p>
+<h2>What's included</h2><ul class="checks two-col">{pts}</ul>
+<h2>How it works</h2><div class="grid g2 steps-mini">
 <div class="step"><div class="n">01</div><h3>Audit &amp; setup</h3><p>Goals, tracking and a clear plan.</p></div>
 <div class="step"><div class="n">02</div><h3>Launch &amp; test</h3><p>Focused campaigns with structured tests.</p></div>
 <div class="step"><div class="n">03</div><h3>Optimise</h3><p>Cut waste and improve lead quality.</p></div>
@@ -454,7 +512,7 @@ for s in SERVICES:
 <div class="box"><h4>All services</h4><ul>{others}</ul></div>
 <div class="box"><h4>Platforms &amp; tools</h4><div class="tags">{tags}</div></div>
 <div class="box"><h4>KPIs we track</h4><div class="tags">{kpis}</div></div>
-<div class="box"><h4>Want better results?</h4><p style="margin-bottom:16px;color:var(--muted)">Get a free audit of your ad account.</p><a href="contact.html" class="btn btn-primary">Get Free Audit {ARR}</a></div>
+<div class="box cta-box"><h4>Want better results?</h4><p>Get a free audit of your ad account.</p><a href="contact.html" class="btn btn-light">Get Free Audit {ARR}</a></div>
 </aside></div></section>
 """ + foot()
     write(f"services-{s['slug']}.html", html)
@@ -468,26 +526,27 @@ write("blog.html", blog)
 for p in POSTS:
     body = "".join(f"<p>{x}</p>" for x in p["body"])
     html = head(p["title"], p["desc"], "blog.html") + page_hero(p["title"], f"{p['date']} · {p['cat']}", '<a href="blog.html">Blog</a> / Article') + f"""
-<section><div class="wrap legal rv"><div class="thumb {p['t']}" style="border-radius:20px;height:260px;margin-bottom:30px">{p['e']}</div>
-{body}<br><a href="blog.html" class="btn btn-dark">{ic("arrow-left", 17, "ia")} Back to blog</a></div></section>
+<section><div class="wrap legal article rv"><div class="thumb post-hero {p['t']}">{ic(p['e'], 64)}</div>
+{body}<a href="blog.html" class="btn btn-dark">{ic("arrow-left", 17, "ia")} Back to blog</a></div></section>
 """ + foot()
     write(f"blog-{p['slug']}.html", html)
 
 # ---------- CONTACT ----------
 opts = "".join(f"<option>{s['name']}</option>" for s in SERVICES) + "<option>Not sure yet</option>"
+bud_opts = "".join(f"<option>{b}</option>" for b in BUDGETS)
 contact = head("Contact Us", "Get a free ad account audit from Raventon Partners.", "contact.html") + page_hero("Get Your Free Audit", "Tell us about your business and goals. We reply within one business day.", "Contact") + f"""
 <section><div class="wrap contact">
-<div class="info rv">
+<div class="info rv left"><i class="glow" aria-hidden="true"></i>
 <div class="it"><div class="ico">{ic("pin")}</div><div><b>Visit us</b><span>221 Market Street, Suite 400, Austin, TX 78701</span></div></div>
 <div class="it"><div class="ico">{ic("mail")}</div><div><b>Email</b><span>hello@raventonpartners.example</span></div></div>
 <div class="it"><div class="ico">{ic("phone")}</div><div><b>Phone</b><span>+1 (555) 014-2290</span></div></div>
 <div class="it"><div class="ico">{ic("clock")}</div><div><b>Working hours</b><span>Mon – Fri, 9:00 AM – 6:00 PM</span></div></div></div>
-<form class="f rv" id="contactForm">
-<div class="two"><label>Full name<input required placeholder="John Doe"></label><label>Email<input type="email" required placeholder="you@company.com"></label></div>
-<div class="two"><label>Phone<input placeholder="+1 555 000 0000"></label><label>Service<select>{opts}</select></label></div>
-<div class="two"><label>Website<input placeholder="https://yourwebsite.com"></label><label>Monthly ad budget<select><option>Under $1,000</option><option>$1,000 – $5,000</option><option>$5,000 – $20,000</option><option>$20,000+</option><option>Not sure yet</option></select></label></div>
-<label>Your goals<textarea required placeholder="Tell us what you want to achieve with paid ads..."></textarea></label>
-<div class="ok" id="formOk">Thank you! Your request has been received. We will contact you shortly.</div>
+<form class="f rv right" id="contactForm">
+<div class="two"><label>Full name<input name="full_name" required autocomplete="name" placeholder="John Doe"></label><label>Email<input type="email" name="email" required autocomplete="email" placeholder="you@company.com"></label></div>
+<div class="two"><label>Phone<input name="phone" autocomplete="tel" placeholder="+1 555 000 0000"></label><label>Service<select name="service">{opts}</select></label></div>
+<div class="two"><label>Website<input name="website" placeholder="https://yourwebsite.com"></label><label>Monthly ad budget<select name="budget">{bud_opts}</select></label></div>
+<label>Your goals<textarea name="goals" required placeholder="Tell us what you want to achieve with paid ads..."></textarea></label>
+<div class="form-msg" role="alert" hidden></div><div class="ok" id="formOk" role="status">Thank you! Your request has been received. We will contact you shortly.</div>
 <button class="btn btn-primary" type="submit">Request Free Audit {ARR}</button></form></div></section>
 """ + foot()
 write("contact.html", contact)
@@ -512,10 +571,162 @@ legal("Terms & Conditions", "terms-conditions.html", [
     ("Liability", "To the extent permitted by law, we are not liable for indirect or consequential losses arising from use of this website."),
 ])
 
+# ---------- ACCOUNTS (login / register / dashboard) ----------
+ROLE_COPY = {
+    "advertiser": dict(label="Advertiser", h1="Grow With", h2="Raventon Partners",
+                       side_p="Track your campaigns, leads and reports in one secure place.",
+                       extra=("Monthly ad budget", BUDGETS)),
+    "publisher": dict(label="Publisher", h1="Monetise", h2="Your Traffic",
+                      side_p="Access offers, payouts and performance for your traffic sources.",
+                      extra=("Main traffic source", TRAFFIC)),
+}
+
+# orbiting globe illustration for the auth screens (pure SVG, no images)
+GLOBE = """<svg class="globe" viewBox="0 0 560 560" aria-hidden="true" focusable="false">
+<defs>
+<radialGradient id="gSphere" cx="38%" cy="32%" r="75%"><stop offset="0" stop-color="#173c31"/><stop offset=".45" stop-color="#0a1d17"/><stop offset="1" stop-color="#020605"/></radialGradient>
+<radialGradient id="gHalo" cx="50%" cy="50%" r="50%"><stop offset=".72" stop-color="#2fbf8f" stop-opacity="0"/><stop offset=".8" stop-color="#2fbf8f" stop-opacity=".45"/><stop offset="1" stop-color="#2fbf8f" stop-opacity="0"/></radialGradient>
+<linearGradient id="gRim" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#9BE3C6" stop-opacity=".9"/><stop offset=".5" stop-color="#2A7E68" stop-opacity=".25"/><stop offset="1" stop-color="#9BE3C6" stop-opacity=".6"/></linearGradient>
+<pattern id="gDots" width="9" height="9" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1.05" fill="#9BE3C6"/></pattern>
+<clipPath id="gClip"><circle cx="280" cy="280" r="200"/></clipPath>
+<mask id="gLand"><rect width="560" height="560" fill="#000"/>
+<path fill="#fff" d="M150 170c30-30 80-40 110-28 18 8 12 30 34 34 26 5 40-18 66-6 22 10 14 36 0 48-18 16-46 8-60 26-12 16 6 36-8 52-16 18-44 6-60 22-18 18-4 48-24 64-22 16-52-6-62-30-10-24 6-48-6-70-10-18-34-24-30-48 3-20 22-48 50-64z"/>
+<path fill="#fff" d="M330 300c20-12 48-6 62 12 14 18 8 44 22 60 12 14 34 18 32 38-2 22-30 34-52 30-26-5-34-34-54-48-18-12-42-14-48-34-6-22 18-46 38-58z"/>
+<path fill="#fff" d="M120 300c18 0 34 14 36 32 2 20-14 34-14 54 0 18 16 34 6 48-10 12-30 6-40-8-14-20-10-46-14-70-3-22 6-56 26-56z"/>
+</mask>
+</defs>
+<circle class="g-halo" cx="280" cy="280" r="250" fill="url(#gHalo)"/>
+<circle cx="280" cy="280" r="200" fill="url(#gSphere)"/>
+<g clip-path="url(#gClip)">
+<rect class="g-land" width="560" height="560" fill="url(#gDots)" mask="url(#gLand)" opacity=".55"/>
+<g class="g-grid" fill="none" stroke="#9BE3C6" stroke-opacity=".13">
+<ellipse cx="280" cy="280" rx="200" ry="200"/><ellipse cx="280" cy="280" rx="150" ry="200"/><ellipse cx="280" cy="280" rx="95" ry="200"/><ellipse cx="280" cy="280" rx="35" ry="200"/>
+<ellipse cx="280" cy="280" rx="200" ry="60"/><ellipse cx="280" cy="280" rx="200" ry="130"/><path d="M80 280h400"/>
+</g></g>
+<circle cx="280" cy="280" r="200" fill="none" stroke="url(#gRim)" stroke-width="2"/>
+<g class="g-orbits" fill="none" stroke="#9BE3C6" stroke-opacity=".22">
+<ellipse id="gO1" cx="280" cy="280" rx="262" ry="96" transform="rotate(-24 280 280)"/>
+<ellipse id="gO2" cx="280" cy="280" rx="240" ry="150" transform="rotate(32 280 280)"/>
+</g>
+<circle r="4" fill="#9BE3C6" class="g-node"><animateMotion dur="14s" repeatCount="indefinite" rotate="auto"><mpath href="#gO1"/></animateMotion></circle>
+<circle r="3.4" fill="#9BE3C6" class="g-node"><animateMotion dur="20s" repeatCount="indefinite" begin="-6s"><mpath href="#gO2"/></animateMotion></circle>
+<circle cx="408" cy="196" r="3" fill="#9BE3C6" class="g-ping"/><circle cx="176" cy="392" r="3" fill="#9BE3C6" class="g-ping p2"/>
+</svg>"""
+
+
+def auth_head(title):
+    return f"""<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>{title} | {BRAND}</title>
+<meta name="description" content="{title} for {BRAND}.">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#000000">
+<link rel="icon" href="{FAVICON}">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="{FONTS}&family=Manrope:wght@400;500;600;700;800" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+<script>document.documentElement.classList.add('js','no-pre')</script>
+</head><body class="lp-body">
+<main class="lp" id="main">"""
+
+
+AUTH_FOOT = '</main><script src="assets/main.js"></script></body></html>'
+
+
+def auth_page(role, mode):
+    c = ROLE_COPY[role]
+    other = "publisher" if role == "advertiser" else "advertiser"
+    is_login = mode == "login"
+    title = f"{c['label']} {'Login' if is_login else 'Register'}"
+    eye = f'<button type="button" class="pw-toggle" aria-label="Show password">{ic("eye", 18)}</button>'
+    if is_login:
+        fields = f"""<label class="lp-f">Email<input type="email" name="email" required autocomplete="email" placeholder="Email"></label>
+<label class="lp-f">Password<span class="pw"><input type="password" name="password" required autocomplete="current-password" placeholder="Password">{eye}</span></label>
+<label class="check lp-check"><input type="checkbox" name="remember"><span>Remember device for 30 days.</span></label>"""
+        heading = "Login your account"
+        btn = "Sign In"
+        links = f'<div class="lp-links"><a href="contact.html">Forgot Password?</a><a href="{role}-register.html">Create New Account?</a></div>'
+    else:
+        lbl, opts = c["extra"]
+        options = "".join(f"<option>{o}</option>" for o in opts)
+        req = '<b class="req">*</b>'
+
+        def f(label, icon, inp, required=False):
+            return f'<label class="lp-f"><span>{label}{req if required else ""}</span><span class="iw"><span class="fi">{ic(icon, 17)}</span>{inp}</span></label>'
+        codes = "".join(f'<option value="{v}">{t}</option>' for v, t in [("+1", "US +1"), ("+44", "UK +44"), ("+61", "AU +61"), ("+971", "AE +971"), ("+91", "IN +91"), ("+92", "PK +92"), ("+49", "DE +49")])
+        fields = f"""<h3 class="lp-sub">Account Type{req}</h3>
+<div class="lp-types"><label><input type="radio" name="account_type" value="Individual" checked><span>{ic("user", 26)}Individual</span></label><label><input type="radio" name="account_type" value="Business Entity"><span>{ic("users", 26)}Business Entity</span></label></div>
+{f("First Name", "user", '<input name="first_name" required autocomplete="given-name" placeholder="First Name">', True)}
+{f("Last Name", "user", '<input name="last_name" required autocomplete="family-name" placeholder="Last Name">', True)}
+<label class="lp-f">Phone Number<span class="iw tel"><select name="phone_code" aria-label="Country code">{codes}</select><input name="phone" type="tel" autocomplete="tel-national" placeholder="(201) 555-0123"></span></label>
+{f("Email", "mail", '<input type="email" name="email" required autocomplete="email" placeholder="abc@mail.com">', True)}
+{f("Company Name", "building", '<input name="company" required autocomplete="organization" placeholder="Company Name">', True)}
+{f("Website", "globe", '<input name="website" placeholder="https://yourwebsite.com">')}
+{f(lbl, "bars", f'<select name="details">{options}</select>')}
+{f("Street Address", "pin", '<input name="address" autocomplete="street-address" placeholder="Street Address">')}
+{f("City", "building", '<input name="city" autocomplete="address-level2" placeholder="City">')}
+{f("State", "compass", '<input name="state" autocomplete="address-level1" placeholder="State">')}
+{f("Country", "globe", '<input name="country" required autocomplete="country-name" placeholder="Country">', True)}
+<h3 class="lp-sub">Security</h3>
+{f("Password", "lock", f'<span class="pw"><input type="password" name="password" required minlength="8" autocomplete="new-password" placeholder="At least 8 characters">{eye}</span>', True)}
+{f("Confirm Password", "lock", '<input type="password" name="confirm" required minlength="8" autocomplete="new-password" placeholder="Repeat password">', True)}
+<label class="check lp-check"><input type="checkbox" name="marketing"><span>I agree to receive marketing updates from {BRAND} by email or phone. You can unsubscribe at any time.</span></label>
+<label class="check lp-check"><input type="checkbox" name="agree" required><span>I agree to the <a href="terms-conditions.html">Terms</a> and <a href="privacy-policy.html">Privacy Policy</a>.</span></label>"""
+        heading = "Personal Information"
+        btn = "Create Account"
+        links = f'<div class="lp-links center"><span>Already have an account?</span><a href="{role}-login.html">Sign In</a></div>'
+    html = auth_head(title) + f"""
+<section class="lp-art{' sticky' if not is_login else ''}">
+<div class="lp-cap">Performance<br>Marketing<br>Agency<i></i></div>
+<div class="lp-globe">{GLOBE}<a href="index.html" class="lp-center" aria-label="{BRAND} home">{mark("mk-g", 76)}<span class="wm"><b>Raventon</b><small>Partners</small></span></a></div>
+<div class="lp-copy"><h1>{c['h1']}<span>{c['h2']}</span></h1><i></i><p>{c['side_p']}</p>
+<div class="lp-stats"><div><b>250+</b><small>Campaigns launched</small></div><div><b>120+</b><small>Brands served</small></div><div><b>95%</b><small>Client retention</small></div></div></div>
+</section>
+<section class="lp-panel">
+<a href="index.html" class="lp-back">{ic("arrow-left", 16)} Back to website</a>
+<form class="lp-form{' reg' if not is_login else ''}" data-auth="{mode}" data-role="{role}" novalidate>
+<a href="index.html" class="lp-logo" aria-label="{BRAND} home">{mark("mk-lp", 58)}<span class="wm"><b>Raventon</b><small>Partners</small></span></a>
+<div class="lp-role"><a href="{role}-{mode}.html" class="on">{c['label']}</a><a href="{other}-{mode}.html">{ROLE_COPY[other]['label']}</a></div>
+<h2>{heading}</h2>
+{fields}
+<div class="form-msg" role="alert" hidden></div>
+<button class="lp-btn" type="submit"><span>{btn}</span></button>
+{links}
+</form>
+</section>
+""" + AUTH_FOOT
+    write(f"{role}-{mode}.html", html)
+
+
+for _r in ROLE_COPY:
+    auth_page(_r, "login")
+    auth_page(_r, "register")
+
+dashboard = head("Dashboard", f"Your {BRAND} account.", "") + f"""
+<section class="dash"><i class="glow a1" aria-hidden="true"></i><div class="wrap">
+<div class="dash-loading" id="dashLoading"><span class="spinner"></span>Loading your account…</div>
+<div class="dash-guest" id="dashGuest" hidden><h1>Please sign in</h1><p>Your session has ended or you are not signed in.</p>
+<div class="hero-btns"><a class="btn btn-primary" href="advertiser-login.html">Advertiser Login {ARR}</a><a class="btn btn-ghost" href="publisher-login.html">Publisher Login</a></div></div>
+<div id="dashApp" hidden>
+<div class="dash-top"><div><span class="eyebrow" data-f="role_label"></span><h1>Welcome, <span data-f="first_name"></span></h1><p>Member since <span data-f="since"></span></p></div>
+<button type="button" class="btn btn-ghost js-logout">{ic("logout", 17)} Sign out</button></div>
+<div class="dash-grid">
+<div class="dcard"><h3>{ic("user", 20)} Account details</h3><dl>
+<dt>Account type</dt><dd data-f="account_type"></dd><dt>Full name</dt><dd data-f="full_name"></dd><dt>Company</dt><dd data-f="company"></dd><dt>Email</dt><dd data-f="email"></dd>
+<dt>Phone</dt><dd data-f="phone"></dd><dt>Website</dt><dd data-f="website"></dd><dt data-f="details_label"></dt><dd data-f="details"></dd><dt>Location</dt><dd data-f="location"></dd></dl></div>
+<div class="dcard dcard-g"><h3>{ic("bars", 20)} Performance reporting</h3><p>Your reporting will appear here once your account manager connects your ad accounts and tracking.</p>
+<a class="btn btn-light" href="contact.html">Book your free audit {ARR}</a></div>
+<div class="dcard"><h3>{ic("checklist", 20)} Next steps</h3><ul class="checks"><li>Complete your profile details</li><li>Share access to your ad accounts</li><li>Agree goals and reporting with your manager</li></ul></div>
+</div></div>
+</div></section>
+""" + foot()
+write("dashboard.html", dashboard)
+
 # ---------- 404 ----------
 write("404.html", head("Page Not Found", "Page not found.", "") + """
-<div class="nf"><div><h1>404</h1><h2 style="color:#fff">Page not found</h2><p>The page you are looking for does not exist or has moved.</p>
-<a href="index.html" class="btn btn-primary">Back to Home</a></div></div>
+<div class="nf"><div class="ph-art" aria-hidden="true"><i></i><i></i><i></i></div><div class="nf-in"><h1 class="ld" style="--d:0">404</h1><h2 class="ld" style="--d:1">Page not found</h2><p class="ld" style="--d:2">The page you are looking for does not exist or has moved.</p>
+<a href="index.html" class="btn btn-primary ld" style="--d:3">Back to Home</a></div></div>
 """ + foot())
 
 print("Built", len(os.listdir(OUT)), "items in", OUT)
